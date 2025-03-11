@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "minecraft_quest_ai:block/quest_block" }
+  }
+}
