@@ -1,0 +1,431 @@
+[11Mar2025 11:30:56.936] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forge_userdev_client, --version, MOD_DEV, --assetIndex, 19, --assetsDir, /Users/ellafont/.gradle/caches/forge_gradle/assets, --gameDir, .]
+[11Mar2025 11:30:56.937] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: JVM identified as Eclipse Adoptium OpenJDK 64-Bit Server VM 21.0.6+7-LTS
+[11Mar2025 11:30:56.937] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.2.4 starting: java version 21.0.6 by Eclipse Adoptium; OS Mac OS X arch aarch64 version 15.3.1
+[11Mar2025 11:30:56.981] [main/WARN] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Configuration file /Users/ellafont/Desktop/CMPM-Final/MinecraftQuestingAI/Minecraft-Quest-AI/run/config/fml.toml is not correct. Correcting
+[11Mar2025 11:30:56.982] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[11Mar2025 11:30:56.982] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowLogHelpMessage] was corrected from null to true
+[11Mar2025 11:30:56.982] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[11Mar2025 11:30:56.982] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowShowCPU] was corrected from null to false
+[11Mar2025 11:30:56.988] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[11Mar2025 11:30:57.582] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
+[11Mar2025 11:30:57.582] [main/INFO] [EARLYDISPLAY/]: If this message is the only thing at the bottom of your log before a crash, you probably have a driver issue.
+
+Possible solutions:
+A) Make sure Minecraft is set to prefer high performance graphics in the OS and/or driver control panel
+B) Check for driver updates on the graphics brand's website
+C) Try reinstalling your graphics drivers
+D) If still not working after trying all of the above, ask for further help on the Forge forums or Discord
+
+You can safely ignore this message if the game starts up successfully.
+[11Mar2025 11:30:57.650] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.5
+[11Mar2025 11:30:57.657] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.4
+[11Mar2025 11:30:57.663] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.3
+[11Mar2025 11:30:57.669] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.2
+[11Mar2025 11:30:57.677] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.1
+[11Mar2025 11:30:57.754] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.1 got version 4.1
+[11Mar2025 11:30:57.825] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=jar:file:///Users/ellafont/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.7/8ab114ac385e6dbdad5efafe28aba4df8120915f/mixin-0.8.7.jar!/ Service=ModLauncher Env=CLIENT
+[11Mar2025 11:30:58.116] [EarlyDisplay/INFO] [EARLYDISPLAY/]: GL info: Apple M2 Max GL version 4.1 Metal - 89.3, Apple
+[11Mar2025 11:30:58.275] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[11Mar2025 11:30:58.569] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forge_userdev_client' with arguments [--version, MOD_DEV, --gameDir, ., --assetsDir, /Users/ellafont/.gradle/caches/forge_gradle/assets, --assetIndex, 19]
+[11Mar2025 11:30:58.996] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 243 Datafixer optimizations took 100 milliseconds
+[11Mar2025 11:31:02.151] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:root
+[11Mar2025 11:31:02.151] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:sound_event
+[11Mar2025 11:31:02.151] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:fluid
+[11Mar2025 11:31:02.151] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:particle_type
+[11Mar2025 11:31:02.151] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:attribute
+[11Mar2025 11:31:02.151] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:mob_effect
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:block
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:enchantment_effect_component_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:data_component_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:entity_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:item
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:game_event
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:potion
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:block_entity_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:stat_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:custom_stat
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:chunk_status
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:rule_test
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:rule_block_entity_modifier
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:pos_rule_test
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:menu
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:recipe_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:recipe_serializer
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:position_source_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:command_argument_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:villager_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:villager_profession
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:point_of_interest_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:memory_module_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:sensor_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:activity
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:schedule
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:loot_score_provider_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:loot_number_provider_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:map_decoration_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:loot_nbt_provider_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:loot_function_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:loot_pool_entry_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:loot_condition_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:float_provider_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:int_provider_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:height_provider_type
+[11Mar2025 11:31:02.152] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:block_predicate_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/carver
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/structure_processor
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/feature
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/structure_placement
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/structure_piece
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/structure_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/placement_modifier_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/block_state_provider_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/foliage_placer_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/trunk_placer_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/root_placer_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/tree_decorator_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/feature_size_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/biome_source
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/chunk_generator
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/material_condition
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/material_rule
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/density_function_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:block_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/structure_pool_element
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:worldgen/pool_alias_binding
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:cat_variant
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:frog_variant
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:decorated_pot_pattern
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:creative_mode_tab
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:trigger_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:number_format_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:entity_sub_predicate_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:item_sub_predicate_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:enchantment_level_based_value_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:enchantment_entity_effect_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:enchantment_location_based_effect_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:enchantment_value_effect_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:enchantment_provider_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:consume_effect_type
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:recipe_display
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:slot_display
+[11Mar2025 11:31:02.153] [pool-5-thread-1/INFO] [net.minecraftforge.registries.GameData/REGISTRIES]: 	minecraft:recipe_book_category
+[11Mar2025 11:31:02.272] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/Users/ellafont/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.21.4-54.1.2_mapped_official_1.21.4/forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%230!/assets/.mcassetsroot' uses unexpected schema
+[11Mar2025 11:31:02.272] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/Users/ellafont/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.21.4-54.1.2_mapped_official_1.21.4/forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%230!/data/.mcassetsroot' uses unexpected schema
+[11Mar2025 11:31:02.282] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[11Mar2025 11:31:02.285] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
+[11Mar2025 11:31:02.312] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.3+5
+[11Mar2025 11:31:02.599] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 54.1.2, for MC 1.21.4 with MCP 20241203.143248
+[11Mar2025 11:31:02.599] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v54.1.2 Initialized
+[11Mar2025 11:31:02.608] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Opening jdk.naming.dns/com.sun.jndi.dns to java.naming
+[11Mar2025 11:31:02.661] [Render thread/ERROR] [net.minecraftforge.fml.javafmlmod.FMLModContainer/]: Exception caught during firing event: Block id not set
+	Index: 1
+	Listeners:
+		0: NORMAL
+		1: ASM: net.minecraftforge.registries.DeferredRegister$EventDispatcher@5b40ca7b handleEvent(Lnet/minecraftforge/registries/RegisterEvent;)V
+		2: ASM: net.minecraftforge.registries.DeferredRegister$EventDispatcher@6d4c3674 handleEvent(Lnet/minecraftforge/registries/RegisterEvent;)V
+		3: ASM: net.minecraftforge.registries.DeferredRegister$EventDispatcher@ceea31d handleEvent(Lnet/minecraftforge/registries/RegisterEvent;)V
+java.lang.NullPointerException: Block id not set
+	at java.base/java.util.Objects.requireNonNull(Objects.java:259)
+	at TRANSFORMER/minecraft@1.21.4/net.minecraft.world.level.block.state.BlockBehaviour$Properties.effectiveDrops(BlockBehaviour.java:1162)
+	at TRANSFORMER/minecraft@1.21.4/net.minecraft.world.level.block.state.BlockBehaviour.<init>(BlockBehaviour.java:107)
+	at TRANSFORMER/minecraft@1.21.4/net.minecraft.world.level.block.Block.<init>(Block.java:179)
+	at TRANSFORMER/minecraft_quest_ai@1.0-SNAPSHOT/org.cmpm.minecraftquestai.Minecraft_Quest_AI.lambda$static$0(Minecraft_Quest_AI.java:48)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.DeferredRegister$EventDispatcher.lambda$handleEvent$0(DeferredRegister.java:381)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.RegisterEvent.register(RegisterEvent.java:55)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.DeferredRegister$EventDispatcher.handleEvent(DeferredRegister.java:381)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.__EventDispatcher_handleEvent_RegisterEvent.invoke(.dynamic)
+	at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.ASMEventHandler.invoke(ASMEventHandler.java:46)
+	at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.EventBus.post(EventBus.java:302)
+	at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.EventBus.post(EventBus.java:288)
+	at LAYER PLUGIN/net.minecraftforge.javafmlmod@1.21.4-54.1.2/net.minecraftforge.fml.javafmlmod.FMLModContainer.acceptEvent(FMLModContainer.java:184)
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.lambda$postEventWithWrapInModOrder$19(ModLoader.java:400)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModList.forEachModInOrder(ModList.java:148)
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.postEventWithWrapInModOrder(ModLoader.java:398)
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.postEventWrapContainerInModOrder(ModLoader.java:387)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.GameData.postRegisterEvents(GameData.java:349)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.common.ForgeStatesProvider.lambda$gather$0(ForgeStatesProvider.java:34)
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.handleInlineTransition(ModLoader.java:258)
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.dispatchAndHandleError(ModLoader.java:247)
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:214)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.lambda$begin$1(ClientModLoader.java:48)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.lambda$createRunnableWithCatch$4(ClientModLoader.java:68)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.begin(ClientModLoader.java:48)
+	at TRANSFORMER/minecraft@1.21.4/net.minecraft.client.Minecraft.<init>(Minecraft.java:485)
+	at TRANSFORMER/minecraft@1.21.4/net.minecraft.client.main.Main.main(Main.java:224)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.4-54.1.2/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:96)
+	at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.4-54.1.2/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.lambda$makeService$0(CommonLaunchHandler.java:79)
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:77)
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:97)
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.Launcher.run(Launcher.java:116)
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.Launcher.main(Launcher.java:75)
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.BootstrapEntry.main(BootstrapEntry.java:17)
+	at net.minecraftforge.bootstrap@2.1.7/net.minecraftforge.bootstrap.Bootstrap.moduleMain(Bootstrap.java:188)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at net.minecraftforge.bootstrap.Bootstrap.bootstrapMain(Bootstrap.java:133)
+	at net.minecraftforge.bootstrap.Bootstrap.start(Bootstrap.java:53)
+	at net.minecraftforge.bootstrap.ForgeBootstrap.main(ForgeBootstrap.java:19)
+
+[11Mar2025 11:31:02.662] [Render thread/ERROR] [net.minecraftforge.fml.javafmlmod.FMLModContainer/LOADING]: Caught exception during event RegisterEvent dispatch for modid minecraft_quest_ai
+java.lang.NullPointerException: Block id not set
+	at java.base/java.util.Objects.requireNonNull(Objects.java:259) ~[?:?]
+	at TRANSFORMER/minecraft@1.21.4/net.minecraft.world.level.block.state.BlockBehaviour$Properties.effectiveDrops(BlockBehaviour.java:1162) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%230!/:?]
+	at TRANSFORMER/minecraft@1.21.4/net.minecraft.world.level.block.state.BlockBehaviour.<init>(BlockBehaviour.java:107) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%230!/:?]
+	at TRANSFORMER/minecraft@1.21.4/net.minecraft.world.level.block.Block.<init>(Block.java:179) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%230!/:?]
+	at TRANSFORMER/minecraft_quest_ai@1.0-SNAPSHOT/org.cmpm.minecraftquestai.Minecraft_Quest_AI.lambda$static$0(Minecraft_Quest_AI.java:48) ~[main/:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.DeferredRegister$EventDispatcher.lambda$handleEvent$0(DeferredRegister.java:381) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.RegisterEvent.register(RegisterEvent.java:55) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.DeferredRegister$EventDispatcher.handleEvent(DeferredRegister.java:381) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.__EventDispatcher_handleEvent_RegisterEvent.invoke(.dynamic) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+	at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.ASMEventHandler.invoke(ASMEventHandler.java:46) ~[eventbus-6.2.27.jar:?]
+	at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.EventBus.post(EventBus.java:302) ~[eventbus-6.2.27.jar:?]
+	at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.EventBus.post(EventBus.java:288) ~[eventbus-6.2.27.jar:?]
+	at LAYER PLUGIN/net.minecraftforge.javafmlmod@1.21.4-54.1.2/net.minecraftforge.fml.javafmlmod.FMLModContainer.acceptEvent(FMLModContainer.java:184) ~[javafmllanguage-1.21.4-54.1.2.jar:54.1.2]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.lambda$postEventWithWrapInModOrder$19(ModLoader.java:400) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[?:?]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModList.forEachModInOrder(ModList.java:148) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.postEventWithWrapInModOrder(ModLoader.java:398) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.postEventWrapContainerInModOrder(ModLoader.java:387) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.GameData.postRegisterEvents(GameData.java:349) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.common.ForgeStatesProvider.lambda$gather$0(ForgeStatesProvider.java:34) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.handleInlineTransition(ModLoader.java:258) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.dispatchAndHandleError(ModLoader.java:247) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:214) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.lambda$begin$1(ClientModLoader.java:48) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.lambda$createRunnableWithCatch$4(ClientModLoader.java:68) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.begin(ClientModLoader.java:48) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at TRANSFORMER/minecraft@1.21.4/net.minecraft.client.Minecraft.<init>(Minecraft.java:485) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at TRANSFORMER/minecraft@1.21.4/net.minecraft.client.main.Main.main(Main.java:224) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.4-54.1.2/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:96) ~[fmlloader-1.21.4-54.1.2.jar!/:?]
+	at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.4-54.1.2/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.lambda$makeService$0(CommonLaunchHandler.java:79) ~[fmlloader-1.21.4-54.1.2.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:77) [modlauncher-10.2.4.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:97) [modlauncher-10.2.4.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.Launcher.run(Launcher.java:116) [modlauncher-10.2.4.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.Launcher.main(Launcher.java:75) [modlauncher-10.2.4.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.BootstrapEntry.main(BootstrapEntry.java:17) [modlauncher-10.2.4.jar!/:?]
+	at net.minecraftforge.bootstrap@2.1.7/net.minecraftforge.bootstrap.Bootstrap.moduleMain(Bootstrap.java:188) [bootstrap-2.1.8.jar!/:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at net.minecraftforge.bootstrap.Bootstrap.bootstrapMain(Bootstrap.java:133) [bootstrap-2.1.8.jar:2.1.8]
+	at net.minecraftforge.bootstrap.Bootstrap.start(Bootstrap.java:53) [bootstrap-2.1.8.jar:2.1.8]
+	at net.minecraftforge.bootstrap.ForgeBootstrap.main(ForgeBootstrap.java:19) [bootstrap-2.1.8.jar:2.1.8]
+[11Mar2025 11:31:02.669] [Render thread/ERROR] [net.minecraftforge.fml.javafmlmod.FMLModContainer/]: Exception caught during firing event: Registry Object not present: minecraft_quest_ai:example_block
+	Index: 2
+	Listeners:
+		0: NORMAL
+		1: ASM: net.minecraftforge.registries.DeferredRegister$EventDispatcher@5b40ca7b handleEvent(Lnet/minecraftforge/registries/RegisterEvent;)V
+		2: ASM: net.minecraftforge.registries.DeferredRegister$EventDispatcher@6d4c3674 handleEvent(Lnet/minecraftforge/registries/RegisterEvent;)V
+		3: ASM: net.minecraftforge.registries.DeferredRegister$EventDispatcher@ceea31d handleEvent(Lnet/minecraftforge/registries/RegisterEvent;)V
+java.lang.NullPointerException: Registry Object not present: minecraft_quest_ai:example_block
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.RegistryObject.get(RegistryObject.java:193)
+	at TRANSFORMER/minecraft_quest_ai@1.0-SNAPSHOT/org.cmpm.minecraftquestai.Minecraft_Quest_AI.lambda$static$1(Minecraft_Quest_AI.java:50)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.DeferredRegister$EventDispatcher.lambda$handleEvent$0(DeferredRegister.java:381)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.RegisterEvent.register(RegisterEvent.java:55)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.DeferredRegister$EventDispatcher.handleEvent(DeferredRegister.java:381)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.__EventDispatcher_handleEvent_RegisterEvent.invoke(.dynamic)
+	at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.ASMEventHandler.invoke(ASMEventHandler.java:46)
+	at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.EventBus.post(EventBus.java:302)
+	at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.EventBus.post(EventBus.java:288)
+	at LAYER PLUGIN/net.minecraftforge.javafmlmod@1.21.4-54.1.2/net.minecraftforge.fml.javafmlmod.FMLModContainer.acceptEvent(FMLModContainer.java:184)
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.lambda$postEventWithWrapInModOrder$19(ModLoader.java:400)
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75)
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModList.forEachModInOrder(ModList.java:148)
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.postEventWithWrapInModOrder(ModLoader.java:398)
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.postEventWrapContainerInModOrder(ModLoader.java:387)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.GameData.postRegisterEvents(GameData.java:349)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.common.ForgeStatesProvider.lambda$gather$0(ForgeStatesProvider.java:34)
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.handleInlineTransition(ModLoader.java:258)
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.dispatchAndHandleError(ModLoader.java:247)
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:214)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.lambda$begin$1(ClientModLoader.java:48)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.lambda$createRunnableWithCatch$4(ClientModLoader.java:68)
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.begin(ClientModLoader.java:48)
+	at TRANSFORMER/minecraft@1.21.4/net.minecraft.client.Minecraft.<init>(Minecraft.java:485)
+	at TRANSFORMER/minecraft@1.21.4/net.minecraft.client.main.Main.main(Main.java:224)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.4-54.1.2/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:96)
+	at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.4-54.1.2/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.lambda$makeService$0(CommonLaunchHandler.java:79)
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:77)
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:97)
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.Launcher.run(Launcher.java:116)
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.Launcher.main(Launcher.java:75)
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.BootstrapEntry.main(BootstrapEntry.java:17)
+	at net.minecraftforge.bootstrap@2.1.7/net.minecraftforge.bootstrap.Bootstrap.moduleMain(Bootstrap.java:188)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at net.minecraftforge.bootstrap.Bootstrap.bootstrapMain(Bootstrap.java:133)
+	at net.minecraftforge.bootstrap.Bootstrap.start(Bootstrap.java:53)
+	at net.minecraftforge.bootstrap.ForgeBootstrap.main(ForgeBootstrap.java:19)
+
+[11Mar2025 11:31:02.669] [Render thread/ERROR] [net.minecraftforge.fml.javafmlmod.FMLModContainer/LOADING]: Caught exception during event RegisterEvent dispatch for modid minecraft_quest_ai
+java.lang.NullPointerException: Registry Object not present: minecraft_quest_ai:example_block
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.RegistryObject.get(RegistryObject.java:193) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+	at TRANSFORMER/minecraft_quest_ai@1.0-SNAPSHOT/org.cmpm.minecraftquestai.Minecraft_Quest_AI.lambda$static$1(Minecraft_Quest_AI.java:50) ~[main/:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.DeferredRegister$EventDispatcher.lambda$handleEvent$0(DeferredRegister.java:381) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.RegisterEvent.register(RegisterEvent.java:55) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.DeferredRegister$EventDispatcher.handleEvent(DeferredRegister.java:381) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.__EventDispatcher_handleEvent_RegisterEvent.invoke(.dynamic) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+	at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.ASMEventHandler.invoke(ASMEventHandler.java:46) ~[eventbus-6.2.27.jar:?]
+	at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.EventBus.post(EventBus.java:302) ~[eventbus-6.2.27.jar:?]
+	at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.EventBus.post(EventBus.java:288) ~[eventbus-6.2.27.jar:?]
+	at LAYER PLUGIN/net.minecraftforge.javafmlmod@1.21.4-54.1.2/net.minecraftforge.fml.javafmlmod.FMLModContainer.acceptEvent(FMLModContainer.java:184) ~[javafmllanguage-1.21.4-54.1.2.jar:54.1.2]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.lambda$postEventWithWrapInModOrder$19(ModLoader.java:400) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[?:?]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModList.forEachModInOrder(ModList.java:148) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.postEventWithWrapInModOrder(ModLoader.java:398) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.postEventWrapContainerInModOrder(ModLoader.java:387) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.GameData.postRegisterEvents(GameData.java:349) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.common.ForgeStatesProvider.lambda$gather$0(ForgeStatesProvider.java:34) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.handleInlineTransition(ModLoader.java:258) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.dispatchAndHandleError(ModLoader.java:247) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:214) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.lambda$begin$1(ClientModLoader.java:48) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.lambda$createRunnableWithCatch$4(ClientModLoader.java:68) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.begin(ClientModLoader.java:48) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at TRANSFORMER/minecraft@1.21.4/net.minecraft.client.Minecraft.<init>(Minecraft.java:485) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at TRANSFORMER/minecraft@1.21.4/net.minecraft.client.main.Main.main(Main.java:224) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.4-54.1.2/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:96) ~[fmlloader-1.21.4-54.1.2.jar!/:?]
+	at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.4-54.1.2/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.lambda$makeService$0(CommonLaunchHandler.java:79) ~[fmlloader-1.21.4-54.1.2.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:77) [modlauncher-10.2.4.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:97) [modlauncher-10.2.4.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.Launcher.run(Launcher.java:116) [modlauncher-10.2.4.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.Launcher.main(Launcher.java:75) [modlauncher-10.2.4.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.BootstrapEntry.main(BootstrapEntry.java:17) [modlauncher-10.2.4.jar!/:?]
+	at net.minecraftforge.bootstrap@2.1.7/net.minecraftforge.bootstrap.Bootstrap.moduleMain(Bootstrap.java:188) [bootstrap-2.1.8.jar!/:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at net.minecraftforge.bootstrap.Bootstrap.bootstrapMain(Bootstrap.java:133) [bootstrap-2.1.8.jar:2.1.8]
+	at net.minecraftforge.bootstrap.Bootstrap.start(Bootstrap.java:53) [bootstrap-2.1.8.jar:2.1.8]
+	at net.minecraftforge.bootstrap.ForgeBootstrap.main(ForgeBootstrap.java:19) [bootstrap-2.1.8.jar:2.1.8]
+[11Mar2025 11:31:02.689] [Render thread/FATAL] [net.minecraftforge.registries.GameData/]: Failed to register some entries, see suppressed exceptions for details
+java.lang.RuntimeException: null
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.GameData.postRegisterEvents(GameData.java:337) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.common.ForgeStatesProvider.lambda$gather$0(ForgeStatesProvider.java:34) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.handleInlineTransition(ModLoader.java:258) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.dispatchAndHandleError(ModLoader.java:247) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:214) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.lambda$begin$1(ClientModLoader.java:48) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.lambda$createRunnableWithCatch$4(ClientModLoader.java:68) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.begin(ClientModLoader.java:48) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at TRANSFORMER/minecraft@1.21.4/net.minecraft.client.Minecraft.<init>(Minecraft.java:485) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at TRANSFORMER/minecraft@1.21.4/net.minecraft.client.main.Main.main(Main.java:224) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.4-54.1.2/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:96) ~[fmlloader-1.21.4-54.1.2.jar!/:?]
+	at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.4-54.1.2/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.lambda$makeService$0(CommonLaunchHandler.java:79) ~[fmlloader-1.21.4-54.1.2.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:77) [modlauncher-10.2.4.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:97) [modlauncher-10.2.4.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.Launcher.run(Launcher.java:116) [modlauncher-10.2.4.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.Launcher.main(Launcher.java:75) [modlauncher-10.2.4.jar!/:?]
+	at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.BootstrapEntry.main(BootstrapEntry.java:17) [modlauncher-10.2.4.jar!/:?]
+	at net.minecraftforge.bootstrap@2.1.7/net.minecraftforge.bootstrap.Bootstrap.moduleMain(Bootstrap.java:188) [bootstrap-2.1.8.jar!/:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at net.minecraftforge.bootstrap.Bootstrap.bootstrapMain(Bootstrap.java:133) [bootstrap-2.1.8.jar:2.1.8]
+	at net.minecraftforge.bootstrap.Bootstrap.start(Bootstrap.java:53) [bootstrap-2.1.8.jar:2.1.8]
+	at net.minecraftforge.bootstrap.ForgeBootstrap.main(ForgeBootstrap.java:19) [bootstrap-2.1.8.jar:2.1.8]
+	Suppressed: net.minecraftforge.fml.ModLoadingException: Minecraft-Quest-AI (minecraft_quest_ai) encountered an error during the common_setup event phase
+§7java.lang.NullPointerException: Block id not set
+		at LAYER PLUGIN/net.minecraftforge.javafmlmod@1.21.4-54.1.2/net.minecraftforge.fml.javafmlmod.FMLModContainer.acceptEvent(FMLModContainer.java:188) ~[javafmllanguage-1.21.4-54.1.2.jar:54.1.2]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.lambda$postEventWithWrapInModOrder$19(ModLoader.java:400) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+		at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[?:?]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModList.forEachModInOrder(ModList.java:148) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.postEventWithWrapInModOrder(ModLoader.java:398) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.postEventWrapContainerInModOrder(ModLoader.java:387) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.GameData.postRegisterEvents(GameData.java:349) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.common.ForgeStatesProvider.lambda$gather$0(ForgeStatesProvider.java:34) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.handleInlineTransition(ModLoader.java:258) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.dispatchAndHandleError(ModLoader.java:247) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:214) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.lambda$begin$1(ClientModLoader.java:48) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.lambda$createRunnableWithCatch$4(ClientModLoader.java:68) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.begin(ClientModLoader.java:48) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+		at TRANSFORMER/minecraft@1.21.4/net.minecraft.client.Minecraft.<init>(Minecraft.java:485) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+		at TRANSFORMER/minecraft@1.21.4/net.minecraft.client.main.Main.main(Main.java:224) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+		at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+		at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+		at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.4-54.1.2/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:96) ~[fmlloader-1.21.4-54.1.2.jar!/:?]
+		at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.4-54.1.2/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.lambda$makeService$0(CommonLaunchHandler.java:79) ~[fmlloader-1.21.4-54.1.2.jar!/:?]
+		at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:77) [modlauncher-10.2.4.jar!/:?]
+		at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:97) [modlauncher-10.2.4.jar!/:?]
+		at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.Launcher.run(Launcher.java:116) [modlauncher-10.2.4.jar!/:?]
+		at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.Launcher.main(Launcher.java:75) [modlauncher-10.2.4.jar!/:?]
+		at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.BootstrapEntry.main(BootstrapEntry.java:17) [modlauncher-10.2.4.jar!/:?]
+		at net.minecraftforge.bootstrap@2.1.7/net.minecraftforge.bootstrap.Bootstrap.moduleMain(Bootstrap.java:188) [bootstrap-2.1.8.jar!/:?]
+		at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+		at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+		at net.minecraftforge.bootstrap.Bootstrap.bootstrapMain(Bootstrap.java:133) [bootstrap-2.1.8.jar:2.1.8]
+		at net.minecraftforge.bootstrap.Bootstrap.start(Bootstrap.java:53) [bootstrap-2.1.8.jar:2.1.8]
+		at net.minecraftforge.bootstrap.ForgeBootstrap.main(ForgeBootstrap.java:19) [bootstrap-2.1.8.jar:2.1.8]
+	Caused by: java.lang.NullPointerException: Block id not set
+		at java.base/java.util.Objects.requireNonNull(Objects.java:259) ~[?:?]
+		at TRANSFORMER/minecraft@1.21.4/net.minecraft.world.level.block.state.BlockBehaviour$Properties.effectiveDrops(BlockBehaviour.java:1162) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%230!/:?]
+		at TRANSFORMER/minecraft@1.21.4/net.minecraft.world.level.block.state.BlockBehaviour.<init>(BlockBehaviour.java:107) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%230!/:?]
+		at TRANSFORMER/minecraft@1.21.4/net.minecraft.world.level.block.Block.<init>(Block.java:179) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%230!/:?]
+		at TRANSFORMER/minecraft_quest_ai@1.0-SNAPSHOT/org.cmpm.minecraftquestai.Minecraft_Quest_AI.lambda$static$0(Minecraft_Quest_AI.java:48) ~[main/:?]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.DeferredRegister$EventDispatcher.lambda$handleEvent$0(DeferredRegister.java:381) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.RegisterEvent.register(RegisterEvent.java:55) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.DeferredRegister$EventDispatcher.handleEvent(DeferredRegister.java:381) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.__EventDispatcher_handleEvent_RegisterEvent.invoke(.dynamic) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+		at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.ASMEventHandler.invoke(ASMEventHandler.java:46) ~[eventbus-6.2.27.jar:?]
+		at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.EventBus.post(EventBus.java:302) ~[eventbus-6.2.27.jar:?]
+		at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.EventBus.post(EventBus.java:288) ~[eventbus-6.2.27.jar:?]
+		at LAYER PLUGIN/net.minecraftforge.javafmlmod@1.21.4-54.1.2/net.minecraftforge.fml.javafmlmod.FMLModContainer.acceptEvent(FMLModContainer.java:184) ~[javafmllanguage-1.21.4-54.1.2.jar:54.1.2]
+		... 30 more
+	Suppressed: net.minecraftforge.fml.ModLoadingException: Minecraft-Quest-AI (minecraft_quest_ai) encountered an error during the common_setup event phase
+§7java.lang.NullPointerException: Registry Object not present: minecraft_quest_ai:example_block
+		at LAYER PLUGIN/net.minecraftforge.javafmlmod@1.21.4-54.1.2/net.minecraftforge.fml.javafmlmod.FMLModContainer.acceptEvent(FMLModContainer.java:188) ~[javafmllanguage-1.21.4-54.1.2.jar:54.1.2]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.lambda$postEventWithWrapInModOrder$19(ModLoader.java:400) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+		at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[?:?]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModList.forEachModInOrder(ModList.java:148) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.postEventWithWrapInModOrder(ModLoader.java:398) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.postEventWrapContainerInModOrder(ModLoader.java:387) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.GameData.postRegisterEvents(GameData.java:349) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.common.ForgeStatesProvider.lambda$gather$0(ForgeStatesProvider.java:34) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.handleInlineTransition(ModLoader.java:258) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.dispatchAndHandleError(ModLoader.java:247) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+		at LAYER PLUGIN/net.minecraftforge.fmlcore@1.21.4-54.1.2/net.minecraftforge.fml.ModLoader.gatherAndInitializeMods(ModLoader.java:214) ~[fmlcore-1.21.4-54.1.2.jar:1.0]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.lambda$begin$1(ClientModLoader.java:48) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.lambda$createRunnableWithCatch$4(ClientModLoader.java:68) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.client.loading.ClientModLoader.begin(ClientModLoader.java:48) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+		at TRANSFORMER/minecraft@1.21.4/net.minecraft.client.Minecraft.<init>(Minecraft.java:485) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+		at TRANSFORMER/minecraft@1.21.4/net.minecraft.client.main.Main.main(Main.java:224) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar:?]
+		at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+		at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+		at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.4-54.1.2/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:96) ~[fmlloader-1.21.4-54.1.2.jar!/:?]
+		at SECURE-BOOTSTRAP/net.minecraftforge.fmlloader@1.21.4-54.1.2/net.minecraftforge.fml.loading.targets.CommonLaunchHandler.lambda$makeService$0(CommonLaunchHandler.java:79) ~[fmlloader-1.21.4-54.1.2.jar!/:?]
+		at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:77) [modlauncher-10.2.4.jar!/:?]
+		at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:97) [modlauncher-10.2.4.jar!/:?]
+		at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.Launcher.run(Launcher.java:116) [modlauncher-10.2.4.jar!/:?]
+		at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.Launcher.main(Launcher.java:75) [modlauncher-10.2.4.jar!/:?]
+		at SECURE-BOOTSTRAP/cpw.mods.modlauncher@10.2.4/cpw.mods.modlauncher.BootstrapEntry.main(BootstrapEntry.java:17) [modlauncher-10.2.4.jar!/:?]
+		at net.minecraftforge.bootstrap@2.1.7/net.minecraftforge.bootstrap.Bootstrap.moduleMain(Bootstrap.java:188) [bootstrap-2.1.8.jar!/:?]
+		at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+		at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+		at net.minecraftforge.bootstrap.Bootstrap.bootstrapMain(Bootstrap.java:133) [bootstrap-2.1.8.jar:2.1.8]
+		at net.minecraftforge.bootstrap.Bootstrap.start(Bootstrap.java:53) [bootstrap-2.1.8.jar:2.1.8]
+		at net.minecraftforge.bootstrap.ForgeBootstrap.main(ForgeBootstrap.java:19) [bootstrap-2.1.8.jar:2.1.8]
+	Caused by: java.lang.NullPointerException: Registry Object not present: minecraft_quest_ai:example_block
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.RegistryObject.get(RegistryObject.java:193) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+		at TRANSFORMER/minecraft_quest_ai@1.0-SNAPSHOT/org.cmpm.minecraftquestai.Minecraft_Quest_AI.lambda$static$1(Minecraft_Quest_AI.java:50) ~[main/:?]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.DeferredRegister$EventDispatcher.lambda$handleEvent$0(DeferredRegister.java:381) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.RegisterEvent.register(RegisterEvent.java:55) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.DeferredRegister$EventDispatcher.handleEvent(DeferredRegister.java:381) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+		at TRANSFORMER/net.minecraftforge.forge@54.1.2/net.minecraftforge.registries.__EventDispatcher_handleEvent_RegisterEvent.invoke(.dynamic) ~[forge-1.21.4-54.1.2_mapped_official_1.21.4.jar%231!/:?]
+		at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.ASMEventHandler.invoke(ASMEventHandler.java:46) ~[eventbus-6.2.27.jar:?]
+		at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.EventBus.post(EventBus.java:302) ~[eventbus-6.2.27.jar:?]
+		at SECURE-BOOTSTRAP/net.minecraftforge.eventbus/net.minecraftforge.eventbus.EventBus.post(EventBus.java:288) ~[eventbus-6.2.27.jar:?]
+		at LAYER PLUGIN/net.minecraftforge.javafmlmod@1.21.4-54.1.2/net.minecraftforge.fml.javafmlmod.FMLModContainer.acceptEvent(FMLModContainer.java:184) ~[javafmllanguage-1.21.4-54.1.2.jar:54.1.2]
+		... 30 more
+[11Mar2025 11:31:02.694] [Render thread/FATAL] [net.minecraftforge.registries.GameData/]: Detected errors during registry event dispatch, rolling back to VANILLA state
+[11Mar2025 11:31:03.093] [Render thread/FATAL] [net.minecraftforge.registries.GameData/]: Detected errors during registry event dispatch, roll back to VANILLA complete
+[11Mar2025 11:31:03.690] [Render thread/FATAL] [net.minecraftforge.common.ForgeMod/]: Preparing crash report with UUID 2c90b3b7-5087-4cd5-87ce-043695a0899c
+[11Mar2025 11:31:03.692] [Render thread/FATAL] [net.minecraftforge.common.ForgeMod/]: Preparing crash report with UUID 6dd2cc59-4e91-4336-a0c0-6a732ecd75a0
