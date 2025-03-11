@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "minecraftquests",
+    "name": "Minecraft Quests",
+    "description": "A mod that adds quest functionality to Minecraft",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["Your Name"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
