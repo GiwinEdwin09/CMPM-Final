@@ -1,19 +1,5 @@
-//block states
 {
   "variants": {
     "": { "model": "minecraft_quest_ai:block/quest_block" }
   }
-}
-
-//block model
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "minecraft_quest_ai:block/quest_block"
-  }
-}
-
-//item model
-{
-  "parent": "minecraft_quest_ai:block/quest_block"
 }

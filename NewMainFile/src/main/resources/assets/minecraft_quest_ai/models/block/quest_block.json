@@ -1,4 +1,3 @@
-//block model
 {
   "parent": "block/cube_all",
   "textures": {
