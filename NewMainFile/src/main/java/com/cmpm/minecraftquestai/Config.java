@@ -1,6 +1,5 @@
 package com.cmpm.minecraftquestai;
 
-import com.example.examplemod.ExampleMod;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeConfigSpec;
