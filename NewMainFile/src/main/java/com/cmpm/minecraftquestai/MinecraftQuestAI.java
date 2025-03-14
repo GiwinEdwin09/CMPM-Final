@@ -94,7 +94,9 @@ public class MinecraftQuestAI {
         // Register quests
         event.enqueueWork(() -> {
             questManager.registerQuest(new ItemCollectionQuest("collect_dirt", "Collect Dirt",
-                    "Collect 10 dirt blocks", "minecraft:dirt", 10));
+                     "minecraft:dirt", 10));
+            questManager.registerQuest(new EnemyKillQuest("kill_zombie", "Kill Zombies",
+                     "minecraft:zombie", 5));
         });
     }
 

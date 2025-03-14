@@ -23,12 +23,18 @@ public class ItemCollectionQuest implements Quest {
     // Track completion status for each player
     private final Map<UUID, Boolean> completionStatus = new HashMap<>();
 
-    public ItemCollectionQuest(String id, String title, String description, String itemId, int requiredAmount) {
+    public ItemCollectionQuest(String id, String title, String itemId, int requiredAmount) {
         this.id = id;
         this.title = title;
-        this.description = description;
         this.itemId = itemId;
         this.requiredAmount = requiredAmount;
+        this.description = generateDescription();
+    }
+
+    private String generateDescription() {
+        Item targetItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemId));
+        String itemName = targetItem != null ? targetItem.getName(new ItemStack(targetItem)).getString() : "unknown item";
+        return "Collect " + requiredAmount + " " + itemName + "(s)";
     }
 
     @Override
