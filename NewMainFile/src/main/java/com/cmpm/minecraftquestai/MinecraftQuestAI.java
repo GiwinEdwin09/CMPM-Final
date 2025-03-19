@@ -91,12 +91,10 @@ public class MinecraftQuestAI {
     private void commonSetup(final FMLCommonSetupEvent event) {
         LOGGER.info("HELLO FROM MINECRAFT QUESTS MOD");
 
-        // Register quests
+        // Register initial quests (randomly generated)
         event.enqueueWork(() -> {
-            questManager.registerQuest(new ItemCollectionQuest("collect_dirt", "Collect Dirt",
-                     "minecraft:dirt", 10));
-            questManager.registerQuest(new EnemyKillQuest("kill_zombie", "Kill Zombies",
-                     "minecraft:zombie", 5));
+            questManager.registerQuest(QuestGenerator.generateRandomQuest());
+            questManager.registerQuest(QuestGenerator.generateRandomQuest());
         });
     }
 
