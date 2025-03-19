@@ -81,16 +81,11 @@ public class ItemCollectionQuest implements Quest {
 
     @Override
     public void reward(Player player) {
-        // Mark quest as completed
         completionStatus.put(player.getUUID(), true);
 
         if (player instanceof ServerPlayer serverPlayer) {
-            // Give player rewards
-            ItemStack reward = new ItemStack(MinecraftQuestAI.QUEST_TOKEN.get(), 1);
-            if (!serverPlayer.getInventory().add(reward)) {
-                // If inventory is full, drop at player's feet
-                serverPlayer.drop(reward, false);
-            }
+            // Give player XP
+            serverPlayer.giveExperiencePoints(50); // Adjust XP amount as needed
 
             // Remove the required items
             Item targetItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(itemId));
@@ -109,7 +104,7 @@ public class ItemCollectionQuest implements Quest {
             // Inform player
             player.sendSystemMessage(Component.literal("Received quest reward: ")
                     .withStyle(Style.EMPTY.withColor(0x55FF55))
-                    .append(Component.literal("Quest Token").withStyle(Style.EMPTY.withColor(0xFFAA00))));
+                    .append(Component.literal("50 XP").withStyle(Style.EMPTY.withColor(0xFFAA00))));
         }
     }
 }
