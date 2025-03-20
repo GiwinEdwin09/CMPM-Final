@@ -1,96 +1,84 @@
 package com.cmpm.minecraftquestai;
 
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.EntityType;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.CapabilityToken;
-import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraft.world.level.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.*;
 
 public class QuestManager {
     private static final Logger LOGGER = LoggerFactory.getLogger(QuestManager.class);
 
-    private final List<Quest> quests = new ArrayList<>();
-    private final QLearning qLearning = new QLearning();
-    private final PlayerStats playerStats = new PlayerStats();
-    private GameState currentState = new GameState(0, 0, 0, 20, 1); // Initial state
-
+    // Quest storage
     private final List<Quest> globalQuests = new ArrayList<>();
-    // Track player-specific quest progress
     private final Map<UUID, List<Quest>> playerQuests = new HashMap<>();
 
+    // Performance tracking
+    private final PlayerStats playerStats = new PlayerStats();
 
-    // Track cooldowns between quest generations to avoid spamming
+    // RL and game state tracking
+    private final QLearning qLearning = new QLearning();
+    private final Map<UUID, GameState> playerGameStates = new HashMap<>();
+
+    // Quest data persistence
+    private final Map<UUID, PlayerQuestData> playerQuestData = new HashMap<>();
+
+    // Cooldown and timing
     private final Map<UUID, Long> questGenerationCooldowns = new HashMap<>();
-    //private static final long QUEST_GENERATION_COOLDOWN_MS = 60000; // 1 minute cooldown
-    private static final long QUEST_GENERATION_COOLDOWN_MS = 5000; // Reduced to 5 seconds for testing
+    private static final long QUEST_GENERATION_COOLDOWN_MS = 5000; // 5 seconds for testing
 
-    public QuestManager() {
-        // Initialize with some default quests
-        quests.add(QuestGenerator.generateRandomEnemyKillQuest(1));
-        quests.add(QuestGenerator.generateRandomItemCollectionQuest(1));
-        LOGGER.info("QuestManager initialized with {} default quests", globalQuests.size());
-    }
-
-    public void registerQuest(Quest quest) {
-        if (quests.size() < 10) { // Allow more quests in the pool
-            quests.add(quest);
-        }
-    }
-
-
+    // List of hostile mob types to track for statistics
     private static final List<EntityType<?>> HOSTILE_MOBS = List.of(
             EntityType.ZOMBIE, EntityType.SKELETON, EntityType.CREEPER, EntityType.ENDERMAN,
             EntityType.WITCH, EntityType.SPIDER, EntityType.SLIME, EntityType.BLAZE
     );
 
-    public static int getTotalMobsKilled(ServerPlayer player) {
-        return HOSTILE_MOBS.stream()
-                .mapToInt(entityType -> player.getStats().getValue(Stats.ENTITY_KILLED.get(entityType)))
-                .sum();
-    }
-
-    public List<Quest> getQuests() {
-        return quests;
-    }
-
-    public List<Quest> getQuestsForPlayer(Player player) {
-        return playerQuests.getOrDefault(player.getUUID(), new ArrayList<>());
+    public QuestManager() {
+        // Initialize with default quests
+        globalQuests.add(QuestGenerator.generateRandomEnemyKillQuest(1));
+        globalQuests.add(QuestGenerator.generateRandomItemCollectionQuest(1));
+        LOGGER.info("QuestManager initialized with {} default quests", globalQuests.size());
     }
 
     /**
-     * Initialize quests for a player if they don't have any
-     * @param player The player to initialize quests for
+     * Register a new global quest
      */
+    public void registerQuest(Quest quest) {
+        if (globalQuests.size() < 10) {
+            globalQuests.add(quest);
+            LOGGER.info("New quest registered: {}", quest.getTitle());
+        }
+    }
+
+    /**
+     * Get all quests for a specific player
+     */
+    public List<Quest> getQuestsForPlayer(Player player) {
+        UUID playerUUID = player.getUUID();
+        // Initialize player quests if not present
+        if (!playerQuests.containsKey(playerUUID) || playerQuests.get(playerUUID).isEmpty()) {
+            LOGGER.info("Initializing quests for player: {}", player.getName().getString());
+            if (player instanceof ServerPlayer serverPlayer) {
+                initializePlayerQuests(serverPlayer);
+            }
+        }
+        return playerQuests.getOrDefault(playerUUID, new ArrayList<>());
+    }
+
+    /**
+     * Check if there are any quests available
+     */
+    public boolean hasQuests() {
+        return !globalQuests.isEmpty();
+    }
 
     /**
      * Initialize quests for a new player
@@ -113,6 +101,9 @@ public class QuestManager {
             // Store the quests for this player
             playerQuests.put(playerUUID, newPlayerQuests);
 
+            // Initialize game state
+            playerGameStates.put(playerUUID, new GameState(0, 0, 0, (int)player.getHealth(), 1));
+
             // Reset cooldown so they can get new quests
             questGenerationCooldowns.put(playerUUID, 0L);
 
@@ -120,49 +111,64 @@ public class QuestManager {
         }
     }
 
-    public boolean hasQuests() {
-        return !quests.isEmpty();
-    }
-
     /**
-     * Generate a new quest for a player after they complete a quest
+     * Generate a new quest after completion, using RL to decide on quest parameters
      */
     public Quest generateNewQuestAfterCompletion(ServerPlayer player, Quest completedQuest) {
         LOGGER.info("Generating new quest to replace {} for player {}",
                 completedQuest.getTitle(), player.getName().getString());
 
-        int difficultyLevel = QuestGenerator.getDifficultyLevel();
+        // Get or create game state for this player
+        GameState gameState = getOrCreateGameState(player);
 
-        // Track what type of quest was completed to alternate types
-        Quest newQuest;
-        if (completedQuest instanceof EnemyKillQuest) {
-            // Player completed a kill quest, give them an item quest
-            newQuest = QuestGenerator.generateRandomItemCollectionQuest(difficultyLevel);
-            LOGGER.info("Generated item collection quest: {}", newQuest.getTitle());
-        } else {
-            // Player completed an item quest, give them a kill quest
-            newQuest = QuestGenerator.generateRandomEnemyKillQuest(difficultyLevel);
-            LOGGER.info("Generated enemy kill quest: {}", newQuest.getTitle());
-        }
+        // Update game state after quest completion
+        gameState.setQuestsCompleted(gameState.getQuestsCompleted() + 1);
+        gameState.setMobsKilled(getTotalMobsKilled(player));
+
+        // Use RL to generate follow-up quest
+        Quest newQuest = QuestGenerator.generateFollowUpQuest(completedQuest, gameState, qLearning);
+
+        // Calculate reward for the RL system based on player performance
+        double reward = calculateReward(gameState, QuestGenerator.getLastAction());
+
+        // Simulate next state after action
+        GameState nextState = simulateNextState(gameState, QuestGenerator.getLastAction());
+
+        // Update QL values
+        qLearning.updateQValue(gameState, QuestGenerator.getLastAction(), reward, nextState);
+
+        // Update player's game state
+        playerGameStates.put(player.getUUID(), nextState);
 
         return newQuest;
     }
-    /**
-     * Helper method to notify the player about difficulty changes
-     */
-    private void notifyPlayerOfDifficultyChange(ServerPlayer player, boolean increase) {
-        String message = increase
-                ? "The quests are getting more challenging!"
-                : "The quests are becoming easier.";
 
-        player.sendSystemMessage(Component.literal("[Quest System] ")
-                .withStyle(Style.EMPTY.withColor(0xFFAA00))
-                .append(Component.literal(message)
-                        .withStyle(Style.EMPTY.withColor(0xFFFFFF))));
+    /**
+     * Get or create a game state for a player
+     */
+    private GameState getOrCreateGameState(ServerPlayer player) {
+        UUID playerUUID = player.getUUID();
+        GameState gameState = playerGameStates.get(playerUUID);
+
+        if (gameState == null) {
+            // Create new game state based on player stats
+            int mobsKilled = getTotalMobsKilled(player);
+            int itemsCollected = 0; // Could track this from player's statistics if needed
+            int questsCompleted = 0;
+            int playerHealth = (int) player.getHealth();
+            int currentDifficultyLevel = QuestGenerator.getDifficultyLevel();
+
+            gameState = new GameState(mobsKilled, itemsCollected, questsCompleted,
+                    playerHealth, currentDifficultyLevel);
+
+            playerGameStates.put(playerUUID, gameState);
+        }
+
+        return gameState;
     }
 
     /**
-     * Check if a player can receive a new quest based on cooldown
+     * Check if a player can receive new quests based on cooldown
      */
     private boolean canGenerateQuestForPlayer(UUID playerUUID) {
         long lastGeneration = questGenerationCooldowns.getOrDefault(playerUUID, 0L);
@@ -176,7 +182,7 @@ public class QuestManager {
     }
 
     /**
-     * Update the quest generation cooldown for a player
+     * Update quest generation cooldown
      */
     private void updateQuestGenerationCooldown(UUID playerUUID) {
         long time = System.currentTimeMillis();
@@ -185,8 +191,98 @@ public class QuestManager {
     }
 
     /**
-     * Check for completed quests and reward players
-     * FIXED: This is the key method that was causing issues with quest regeneration
+     * Calculate reward for RL system based on player performance
+     */
+    private double calculateReward(GameState state, QuestAction action) {
+        double reward = 0.0;
+
+        // Base reward for completing a quest
+        reward += 1.0;
+
+        // If player has completed many quests at current difficulty, reward more
+        if (state.getQuestsCompleted() > 5 * state.getCurrentDifficultyLevel()) {
+            reward += 2.0; // Player is doing well at current difficulty
+        }
+
+        // If player health is low, penalize making things harder
+        if (state.getPlayerHealth() < 10) {
+            if (action == QuestAction.INCREASE_MOBS || action == QuestAction.INCREASE_ITEMS) {
+                reward -= 1.0;
+            }
+        }
+
+        // Reward system for finding the right difficulty
+        // Too easy (many quests completed quickly) should lead to increased difficulty
+        // Too hard (player health low, few quests completed) should reduce difficulty
+        if (state.getQuestsCompleted() > 10 * state.getCurrentDifficultyLevel()) {
+            // Too easy - reward increasing difficulty
+            if (action == QuestAction.INCREASE_MOBS || action == QuestAction.INCREASE_ITEMS) {
+                reward += 3.0;
+            }
+        } else if (state.getQuestsCompleted() < 3 * state.getCurrentDifficultyLevel()) {
+            // Too hard - reward decreasing difficulty
+            if (action == QuestAction.DECREASE_MOBS || action == QuestAction.DECREASE_ITEMS) {
+                reward += 3.0;
+            }
+        }
+
+        LOGGER.info("Calculated reward: {} for action: {}", reward, action);
+        return reward;
+    }
+
+    /**
+     * Simulate next game state after applying an action
+     */
+    private GameState simulateNextState(GameState state, QuestAction action) {
+        int newDifficulty = state.getCurrentDifficultyLevel();
+
+        // Update difficulty based on action
+        if (action == QuestAction.INCREASE_MOBS || action == QuestAction.INCREASE_ITEMS) {
+            newDifficulty++;
+        } else if (action == QuestAction.DECREASE_MOBS || action == QuestAction.DECREASE_ITEMS) {
+            newDifficulty = Math.max(1, newDifficulty - 1);
+        }
+
+        // Create new state with updated values
+        return new GameState(
+                state.getMobsKilled(),
+                state.getItemsCollected(),
+                state.getQuestsCompleted() + 1,
+                state.getPlayerHealth(),
+                newDifficulty
+        );
+    }
+
+    /**
+     * Get total hostile mobs killed by player
+     */
+    public static int getTotalMobsKilled(ServerPlayer player) {
+        return HOSTILE_MOBS.stream()
+                .mapToInt(entityType -> player.getStats().getValue(Stats.ENTITY_KILLED.get(entityType)))
+                .sum();
+    }
+
+    /**
+     * Provide information about the current quest system state
+     */
+    public Component getQuestSystemInfo(Player player) {
+        GameState state = playerGameStates.get(player.getUUID());
+        if (state == null) {
+            return Component.literal("[Quest System] ")
+                    .withStyle(Style.EMPTY.withColor(0xFFAA00))
+                    .append(Component.literal("No quest data available.")
+                            .withStyle(Style.EMPTY.withColor(0xFFFFFF)));
+        }
+
+        return Component.literal("[Quest System] ")
+                .withStyle(Style.EMPTY.withColor(0xFFAA00))
+                .append(Component.literal("Current Difficulty: " + state.getCurrentDifficultyLevel() +
+                                ", Quests Completed: " + state.getQuestsCompleted())
+                        .withStyle(Style.EMPTY.withColor(0xFFFFFF)));
+    }
+
+    /**
+     * Check for completed quests and reward the player
      */
     public void checkAndRewardCompletedQuests(ServerPlayer player) {
         UUID playerUUID = player.getUUID();
@@ -228,8 +324,9 @@ public class QuestManager {
                 // Add to completed list
                 completedQuests.add(quest);
 
-                // Update game state
-                currentState.setQuestsCompleted(currentState.getQuestsCompleted() + 1);
+                // Update game state with RL
+                GameState gameState = getOrCreateGameState(player);
+                gameState.setQuestsCompleted(gameState.getQuestsCompleted() + 1);
 
                 // Inform player
                 player.sendSystemMessage(Component.literal("[Quest Completed] ")
@@ -247,10 +344,25 @@ public class QuestManager {
             LOGGER.info("Found {} completed quests for player {}",
                     completedQuests.size(), player.getName().getString());
 
-            // Generate new quests for each completed quest
+            // Generate new quests for each completed quest using RL
             for (Quest completedQuest : completedQuests) {
                 Quest newQuest = generateNewQuestAfterCompletion(player, completedQuest);
                 remainingQuests.add(newQuest);
+
+                // Notify player about difficulty if it changed
+                if (QuestGenerator.getLastAction() == QuestAction.INCREASE_MOBS ||
+                        QuestGenerator.getLastAction() == QuestAction.INCREASE_ITEMS) {
+                    player.sendSystemMessage(Component.literal("[Quest System] ")
+                            .withStyle(Style.EMPTY.withColor(0xFFAA00))
+                            .append(Component.literal("The quests are getting more challenging!")
+                                    .withStyle(Style.EMPTY.withColor(0xFFFF55))));
+                } else if (QuestGenerator.getLastAction() == QuestAction.DECREASE_MOBS ||
+                        QuestGenerator.getLastAction() == QuestAction.DECREASE_ITEMS) {
+                    player.sendSystemMessage(Component.literal("[Quest System] ")
+                            .withStyle(Style.EMPTY.withColor(0xFFAA00))
+                            .append(Component.literal("The quests are becoming more manageable.")
+                                    .withStyle(Style.EMPTY.withColor(0xAAAAAA))));
+                }
 
                 // Notify player
                 player.sendSystemMessage(Component.literal("[New Quest] ")
@@ -268,58 +380,17 @@ public class QuestManager {
 
             // Update cooldown
             updateQuestGenerationCooldown(playerUUID);
+
+            // Show current system information
+            player.sendSystemMessage(getQuestSystemInfo(player));
         } else {
             LOGGER.info("No completed quests found for player {}", player.getName().getString());
         }
     }
 
-
     /**
-     * Adjust quest parameters based on RL action
+     * Quest data storage class
      */
-    private void adjustQuestParameters(QuestAction action) {
-        // Adjust quest parameters based on RL action
-        switch (action) {
-            case INCREASE_MOBS -> QuestGenerator.increaseDifficulty();
-            case DECREASE_MOBS -> QuestGenerator.decreaseDifficulty();
-            case INCREASE_ITEMS -> QuestGenerator.increaseItemRequirement();
-            case DECREASE_ITEMS -> QuestGenerator.decreaseItemRequirement();
-        }
-    }
-
-    /**
-     * Calculate reward based on player performance
-     */
-    private double calculateReward(GameState state, QuestAction action) {
-        // Calculate reward based on player performance
-        double reward = 0.0;
-        if (state.getQuestsCompleted() > 10 * state.getCurrentDifficultyLevel()) {
-            reward += 5.0; // Player is doing well
-        } else if (state.getQuestsCompleted() < 5 * state.getCurrentDifficultyLevel()) {
-            reward -= 5.0; // Player is struggling
-        }
-        return reward;
-    }
-
-    /**
-     * Simulate the next state based on the action
-     */
-    private GameState simulateQuest(GameState state, QuestAction action) {
-        // Simulate the next state based on the action
-        return new GameState(
-                state.getMobsKilled(),
-                state.getItemsCollected(),
-                state.getQuestsCompleted() + 1,
-                state.getPlayerHealth(),
-                state.getCurrentDifficultyLevel() + (action == QuestAction.INCREASE_MOBS ? 1 : 0)
-        );
-    }
-
-
-
-    //QUEST DATA PERSISTENCE:
-
-    // Quest data storage class
     public static class PlayerQuestData {
         public UUID playerUUID;
         public List<String> questIds = new ArrayList<>();
@@ -331,12 +402,8 @@ public class QuestManager {
         }
     }
 
-    // Field to store player quest data
-    private final Map<UUID, PlayerQuestData> playerQuestData = new HashMap<>();
-
     /**
      * Save quest data for a player
-     * @param player The player whose data should be saved
      */
     public void savePlayerQuestData(Player player) {
         UUID playerUUID = player.getUUID();
@@ -351,7 +418,11 @@ public class QuestManager {
             data.questIds.add(quest.getId());
         }
 
-        data.questsCompleted = currentState.getQuestsCompleted();
+        GameState state = playerGameStates.get(playerUUID);
+        if (state != null) {
+            data.questsCompleted = state.getQuestsCompleted();
+        }
+
         data.lastQuestGeneration = questGenerationCooldowns.getOrDefault(playerUUID, 0L);
 
         // Save to player NBT if possible
@@ -364,6 +435,7 @@ public class QuestManager {
             questData.putString("questIds", String.join(",", data.questIds));
             questData.putInt("questsCompleted", data.questsCompleted);
             questData.putLong("lastQuestGeneration", data.lastQuestGeneration);
+            questData.putInt("difficultyLevel", QuestGenerator.getDifficultyLevel());
 
             // Store in player's persistent data
             persistentData.put(MinecraftQuestAI.MODID + "_questData", questData);
@@ -371,11 +443,13 @@ public class QuestManager {
 
         // Store in our map for runtime access
         playerQuestData.put(playerUUID, data);
+
+        LOGGER.info("Saved quest data for player {} with {} quests",
+                player.getName().getString(), data.questIds.size());
     }
 
     /**
      * Load quest data for a player
-     * @param player The player whose data should be loaded
      */
     public void loadPlayerQuestData(Player player) {
         UUID playerUUID = player.getUUID();
@@ -388,44 +462,69 @@ public class QuestManager {
                 CompoundTag questData = persistentData.getCompound(MinecraftQuestAI.MODID + "_questData");
 
                 PlayerQuestData data = new PlayerQuestData(playerUUID);
-                data.questIds = Arrays.asList(questData.getString("questIds").split(","));
-                data.questsCompleted = questData.getInt("questsCompleted");
-                data.lastQuestGeneration = questData.getLong("lastQuestGeneration");
 
-                // Restore quest list
-                List<Quest> playerQuestList = new ArrayList<>();
-                for (String questId : data.questIds) {
-                    // Try to find the quest by ID or generate a new one if not found
-                    Quest quest = findQuestById(questId);
-                    if (quest != null) {
-                        playerQuestList.add(quest);
+                // Only populate if questIds is present and not empty
+                String questIdsStr = questData.getString("questIds");
+                if (!questIdsStr.isEmpty()) {
+                    data.questIds = Arrays.asList(questIdsStr.split(","));
+                    data.questsCompleted = questData.getInt("questsCompleted");
+                    data.lastQuestGeneration = questData.getLong("lastQuestGeneration");
+
+                    // Set difficulty level if saved
+                    if (questData.contains("difficultyLevel")) {
+                        // This requires a way to set the difficulty level in QuestGenerator
+                        // which isn't implemented yet
                     }
-                }
 
-                // If we loaded from NBT successfully
-                if (!playerQuestList.isEmpty()) {
-                    playerQuests.put(playerUUID, playerQuestList);
-                    questGenerationCooldowns.put(playerUUID, data.lastQuestGeneration);
-                    currentState.setQuestsCompleted(data.questsCompleted);
-                    loadedFromNBT = true;
+                    // Restore quest list
+                    List<Quest> playerQuestList = new ArrayList<>();
+                    for (String questId : data.questIds) {
+                        // Try to find the quest by ID or generate a new one if not found
+                        Quest quest = findQuestById(questId);
+                        if (quest != null) {
+                            playerQuestList.add(quest);
+                        }
+                    }
+
+                    // If we loaded from NBT successfully
+                    if (!playerQuestList.isEmpty()) {
+                        playerQuests.put(playerUUID, playerQuestList);
+                        questGenerationCooldowns.put(playerUUID, data.lastQuestGeneration);
+
+                        // Create game state
+                        GameState gameState = new GameState(
+                                0, // We don't know mobs killed from NBT
+                                0, // We don't know items collected from NBT
+                                data.questsCompleted,
+                                (int) player.getHealth(),
+                                QuestGenerator.getDifficultyLevel()
+                        );
+                        playerGameStates.put(playerUUID, gameState);
+
+                        loadedFromNBT = true;
+
+                        LOGGER.info("Loaded {} quests for player {} from NBT",
+                                playerQuestList.size(), player.getName().getString());
+                    }
                 }
             }
         }
 
         // If we couldn't load from NBT, initialize with default quests
         if (!loadedFromNBT) {
-            initializePlayerQuests((ServerPlayer) player);
+            if (player instanceof ServerPlayer serverPlayer) {
+                initializePlayerQuests(serverPlayer);
+                LOGGER.info("Initialized default quests for player {}", player.getName().getString());
+            }
         }
     }
 
     /**
      * Find a quest by its ID
-     * @param questId The ID of the quest to find
-     * @return The quest with the specified ID, or null if not found
      */
     private Quest findQuestById(String questId) {
         // Check main quest list first
-        for (Quest quest : quests) {
+        for (Quest quest : globalQuests) {
             if (quest.getId().equals(questId)) {
                 return quest;
             }
@@ -454,12 +553,12 @@ public class QuestManager {
     }
 
     /**
-     * Event handler for player login and logout to save/load quest data
+     * Event handlers for player login/logout and other events
      */
     @Mod.EventBusSubscriber(modid = MinecraftQuestAI.MODID)
     public static class QuestDataEventHandler {
         @SubscribeEvent
-        public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+        public static void onPlayerLoggedIn(net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent event) {
             Player player = event.getEntity();
             if (player instanceof ServerPlayer serverPlayer) {
                 MinecraftQuestAI.questManager.loadPlayerQuestData(serverPlayer);
@@ -467,7 +566,7 @@ public class QuestManager {
         }
 
         @SubscribeEvent
-        public static void onPlayerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
+        public static void onPlayerLoggedOut(net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent event) {
             Player player = event.getEntity();
             if (player instanceof ServerPlayer serverPlayer) {
                 MinecraftQuestAI.questManager.savePlayerQuestData(serverPlayer);
@@ -475,7 +574,7 @@ public class QuestManager {
         }
 
         @SubscribeEvent
-        public static void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        public static void onPlayerRespawn(net.minecraftforge.event.entity.player.PlayerEvent.PlayerRespawnEvent event) {
             Player player = event.getEntity();
             if (player instanceof ServerPlayer serverPlayer) {
                 MinecraftQuestAI.questManager.loadPlayerQuestData(serverPlayer);
@@ -483,7 +582,7 @@ public class QuestManager {
         }
 
         @SubscribeEvent
-        public static void onPlayerClone(PlayerEvent.Clone event) {
+        public static void onPlayerClone(net.minecraftforge.event.entity.player.PlayerEvent.Clone event) {
             Player originalPlayer = event.getOriginal();
             Player newPlayer = event.getEntity();
 
@@ -503,5 +602,4 @@ public class QuestManager {
             }
         }
     }
-
 }
