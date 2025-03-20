@@ -3,6 +3,7 @@ package com.cmpm.minecraftquestai;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -44,7 +45,9 @@ public class QuestBlock extends Block {
                 }
 
                 // Check for completed quests and give rewards
-                MinecraftQuestAI.questManager.checkAndRewardCompletedQuests(player);
+                if (player instanceof ServerPlayer serverPlayer) {
+                    MinecraftQuestAI.questManager.checkAndRewardCompletedQuests(serverPlayer);
+                }
             } else {
                 player.sendSystemMessage(Component.literal("[Quest] ").withStyle(Style.EMPTY.withColor(0xFFAA00))
                         .append(Component.literal("No quests available.").withStyle(Style.EMPTY.withColor(0xFF5555))));
