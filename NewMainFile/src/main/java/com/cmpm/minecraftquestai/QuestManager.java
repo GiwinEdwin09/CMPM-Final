@@ -25,6 +25,9 @@ import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraft.world.level.Level;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileReader;
@@ -34,29 +37,36 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 public class QuestManager {
+    private static final Logger LOGGER = LoggerFactory.getLogger(QuestManager.class);
+
     private final List<Quest> quests = new ArrayList<>();
     private final QLearning qLearning = new QLearning();
     private final PlayerStats playerStats = new PlayerStats();
     private GameState currentState = new GameState(0, 0, 0, 20, 1); // Initial state
 
+    private final List<Quest> globalQuests = new ArrayList<>();
     // Track player-specific quest progress
     private final Map<UUID, List<Quest>> playerQuests = new HashMap<>();
 
+
     // Track cooldowns between quest generations to avoid spamming
     private final Map<UUID, Long> questGenerationCooldowns = new HashMap<>();
-    private static final long QUEST_GENERATION_COOLDOWN_MS = 60000; // 1 minute cooldown
+    //private static final long QUEST_GENERATION_COOLDOWN_MS = 60000; // 1 minute cooldown
+    private static final long QUEST_GENERATION_COOLDOWN_MS = 5000; // Reduced to 5 seconds for testing
 
     public QuestManager() {
         // Initialize with some default quests
         quests.add(QuestGenerator.generateRandomEnemyKillQuest(1));
         quests.add(QuestGenerator.generateRandomItemCollectionQuest(1));
+        LOGGER.info("QuestManager initialized with {} default quests", globalQuests.size());
     }
 
     public void registerQuest(Quest quest) {
-        if (quests.size() < 5) { // Allow more quests in the pool
+        if (quests.size() < 10) { // Allow more quests in the pool
             quests.add(quest);
         }
     }
+
 
     private static final List<EntityType<?>> HOSTILE_MOBS = List.of(
             EntityType.ZOMBIE, EntityType.SKELETON, EntityType.CREEPER, EntityType.ENDERMAN,
@@ -81,20 +91,32 @@ public class QuestManager {
      * Initialize quests for a player if they don't have any
      * @param player The player to initialize quests for
      */
+
+    /**
+     * Initialize quests for a new player
+     */
     public void initializePlayerQuests(ServerPlayer player) {
         UUID playerUUID = player.getUUID();
         if (!playerQuests.containsKey(playerUUID) || playerQuests.get(playerUUID).isEmpty()) {
             List<Quest> newPlayerQuests = new ArrayList<>();
 
-            // Create a mix of quest types based on starter difficulty
-            newPlayerQuests.add(QuestGenerator.generateRandomEnemyKillQuest(1));
-            newPlayerQuests.add(QuestGenerator.generateRandomItemCollectionQuest(1));
+            // Add an enemy kill quest
+            Quest killQuest = QuestGenerator.generateRandomEnemyKillQuest(1);
+            newPlayerQuests.add(killQuest);
+            LOGGER.info("Created kill quest for {}: {}", player.getName().getString(), killQuest.getTitle());
+
+            // Add an item collection quest
+            Quest itemQuest = QuestGenerator.generateRandomItemCollectionQuest(1);
+            newPlayerQuests.add(itemQuest);
+            LOGGER.info("Created item quest for {}: {}", player.getName().getString(), itemQuest.getTitle());
 
             // Store the quests for this player
             playerQuests.put(playerUUID, newPlayerQuests);
 
-            // Reset cooldown for this player so they can get quests right away
-            updateQuestGenerationCooldown(playerUUID);
+            // Reset cooldown so they can get new quests
+            questGenerationCooldowns.put(playerUUID, 0L);
+
+            LOGGER.info("Initialized {} quests for player {}", newPlayerQuests.size(), player.getName().getString());
         }
     }
 
@@ -106,60 +128,25 @@ public class QuestManager {
      * Generate a new quest for a player after they complete a quest
      */
     public Quest generateNewQuestAfterCompletion(ServerPlayer player, Quest completedQuest) {
-        // Get player's current statistics to determine quest type and difficulty
-        int mobsKilled = getTotalMobsKilled(player);
-        int playerLevel = player.experienceLevel;
-        int questsCompleted = currentState.getQuestsCompleted();
+        LOGGER.info("Generating new quest to replace {} for player {}",
+                completedQuest.getTitle(), player.getName().getString());
 
-        // Calculate a quest difficulty factor based on player's progress
-        int baseDifficulty = QuestGenerator.getDifficultyLevel();
-        int adjustedDifficulty = Math.max(1, baseDifficulty);
+        int difficultyLevel = QuestGenerator.getDifficultyLevel();
 
-        // Determine if we should increase difficulty
-        boolean increaseDifficulty = false;
-        if (questsCompleted > 0 && questsCompleted % 5 == 0) {
-            // Every 5 quests, consider increasing difficulty
-            increaseDifficulty = true;
-        }
-
-        // Adjust quest generation parameters based on completed quest type
+        // Track what type of quest was completed to alternate types
+        Quest newQuest;
         if (completedQuest instanceof EnemyKillQuest) {
-            // Player completed a kill quest, adjust accordingly
-            if (increaseDifficulty) {
-                QuestGenerator.increaseDifficulty();
-                notifyPlayerOfDifficultyChange(player, true);
-            }
-
-            // Randomly decide whether to give a different type of quest
-            // or a more challenging enemy kill quest
-            if (Math.random() < 0.7) {
-                // 70% chance to switch to an item collection quest
-                return QuestGenerator.generateRandomItemCollectionQuest(adjustedDifficulty);
-            } else {
-                // 30% chance to generate another kill quest, possibly harder
-                return QuestGenerator.generateRandomEnemyKillQuest(adjustedDifficulty);
-            }
-        } else if (completedQuest instanceof ItemCollectionQuest) {
-            // Player completed an item collection quest
-            if (increaseDifficulty && Math.random() < 0.5) {
-                QuestGenerator.increaseDifficulty();
-                notifyPlayerOfDifficultyChange(player, true);
-            }
-
-            // Similar logic for item quests
-            if (Math.random() < 0.7) {
-                // 70% chance to switch to an enemy kill quest
-                return QuestGenerator.generateRandomEnemyKillQuest(adjustedDifficulty);
-            } else {
-                // 30% chance to generate another item collection quest
-                return QuestGenerator.generateRandomItemCollectionQuest(adjustedDifficulty);
-            }
+            // Player completed a kill quest, give them an item quest
+            newQuest = QuestGenerator.generateRandomItemCollectionQuest(difficultyLevel);
+            LOGGER.info("Generated item collection quest: {}", newQuest.getTitle());
+        } else {
+            // Player completed an item quest, give them a kill quest
+            newQuest = QuestGenerator.generateRandomEnemyKillQuest(difficultyLevel);
+            LOGGER.info("Generated enemy kill quest: {}", newQuest.getTitle());
         }
 
-        // Default fallback - generate a random quest
-        return QuestGenerator.generateRandomQuest();
+        return newQuest;
     }
-
     /**
      * Helper method to notify the player about difficulty changes
      */
@@ -180,92 +167,112 @@ public class QuestManager {
     private boolean canGenerateQuestForPlayer(UUID playerUUID) {
         long lastGeneration = questGenerationCooldowns.getOrDefault(playerUUID, 0L);
         long currentTime = System.currentTimeMillis();
-        return currentTime - lastGeneration >= QUEST_GENERATION_COOLDOWN_MS;
+        boolean canGenerate = currentTime - lastGeneration >= QUEST_GENERATION_COOLDOWN_MS;
+
+        LOGGER.debug("Quest generation cooldown check: lastGeneration={}, currentTime={}, canGenerate={}",
+                lastGeneration, currentTime, canGenerate);
+
+        return canGenerate;
     }
 
     /**
      * Update the quest generation cooldown for a player
      */
     private void updateQuestGenerationCooldown(UUID playerUUID) {
-        questGenerationCooldowns.put(playerUUID, System.currentTimeMillis());
+        long time = System.currentTimeMillis();
+        questGenerationCooldowns.put(playerUUID, time);
+        LOGGER.debug("Updated quest generation cooldown for player {} to {}", playerUUID, time);
     }
 
     /**
-     * Check for completed quests and reward the player
+     * Check for completed quests and reward players
+     * FIXED: This is the key method that was causing issues with quest regeneration
      */
     public void checkAndRewardCompletedQuests(ServerPlayer player) {
         UUID playerUUID = player.getUUID();
-        List<Quest> playerQuestList = playerQuests.computeIfAbsent(playerUUID, k -> new ArrayList<>(quests));
+        LOGGER.info("Checking for completed quests for player: {}", player.getName().getString());
 
-        // Create a list to track quests that need to be removed (completed quests)
+        // Get player's quest list, initialize if not present
+        List<Quest> playerQuestList = playerQuests.computeIfAbsent(playerUUID, k -> new ArrayList<>());
+        if (playerQuestList.isEmpty()) {
+            LOGGER.info("Player had no quests, initializing...");
+            initializePlayerQuests(player);
+            playerQuestList = playerQuests.get(playerUUID);
+        }
+
+        // Create copies of the lists to avoid concurrent modification
         List<Quest> completedQuests = new ArrayList<>();
+        List<Quest> remainingQuests = new ArrayList<>();
 
+        // First pass: check which quests are completed
         for (Quest quest : playerQuestList) {
-            if (!quest.isCompleted(player) && quest.getProgress(player) >= quest.getRequiredAmount()) {
-                // Quest is complete - reward the player
+            // Force a progress check
+            int progress = quest.getProgress(player);
+            int required = quest.getRequiredAmount();
+
+            LOGGER.info("Quest check: '{}' - Progress: {}/{}, Completed: {}",
+                    quest.getTitle(), progress, required, quest.isCompleted(player));
+
+            if (quest.isCompleted(player)) {
+                // Already completed, track in completed list
+                completedQuests.add(quest);
+                LOGGER.info("Quest '{}' is already completed", quest.getTitle());
+            } else if (progress >= required) {
+                // Ready for completion
+                LOGGER.info("Quest '{}' is ready for completion", quest.getTitle());
+
+                // Reward the player
                 quest.reward(player);
                 playerStats.incrementQuestsCompleted();
 
-                // Add to completed quests list for later removal
+                // Add to completed list
                 completedQuests.add(quest);
 
-                // Update state
-                currentState.setMobsKilled(getTotalMobsKilled(player));
+                // Update game state
                 currentState.setQuestsCompleted(currentState.getQuestsCompleted() + 1);
 
-                // Use reinforcement learning to decide next action
-                QuestAction action = qLearning.chooseAction(currentState);
-                adjustQuestParameters(action);
-
-                // Calculate reward and update Q-learning values
-                double reward = calculateReward(currentState, action);
-                GameState nextState = simulateQuest(currentState, action);
-                qLearning.updateQValue(currentState, action, reward, nextState);
-                currentState = nextState;
-
-                // Inform the player of quest completion
+                // Inform player
                 player.sendSystemMessage(Component.literal("[Quest Completed] ")
                         .withStyle(Style.EMPTY.withColor(0x55FF55))
                         .append(Component.literal(quest.getTitle())
                                 .withStyle(Style.EMPTY.withColor(0xFFFFFF))));
-            }
-        }
-
-        // Process completed quests and generate new ones
-        if (!completedQuests.isEmpty()) {
-            // Check if player can receive new quests now
-            if (canGenerateQuestForPlayer(playerUUID)) {
-                // Remove all completed quests
-                playerQuestList.removeAll(completedQuests);
-
-                // Generate new quests to replace completed ones
-                for (Quest completedQuest : completedQuests) {
-                    Quest newQuest = generateNewQuestAfterCompletion(player, completedQuest);
-                    playerQuestList.add(newQuest);
-
-                    // Notify the player about the new quest
-                    player.sendSystemMessage(Component.literal("[New Quest] ")
-                            .withStyle(Style.EMPTY.withColor(0x55FF55))
-                            .append(Component.literal(newQuest.getTitle())
-                                    .withStyle(Style.EMPTY.withColor(0xFFFFFF))));
-
-                    player.sendSystemMessage(Component.literal(newQuest.getDescription())
-                            .withStyle(Style.EMPTY.withColor(0xAAAAAA)));
-                }
-
-                // Update cooldown
-                updateQuestGenerationCooldown(playerUUID);
             } else {
-                player.sendSystemMessage(Component.literal("[Quest System] ")
-                        .withStyle(Style.EMPTY.withColor(0xFFAA00))
-                        .append(Component.literal("You'll receive new quests soon!")
-                                .withStyle(Style.EMPTY.withColor(0xFFFFFF))));
+                // Not completed, keep in remaining list
+                remainingQuests.add(quest);
             }
         }
 
-        // Save player's quest list
-        playerQuests.put(playerUUID, playerQuestList);
+        // Generate new quests to replace completed ones
+        if (!completedQuests.isEmpty()) {
+            LOGGER.info("Found {} completed quests for player {}",
+                    completedQuests.size(), player.getName().getString());
+
+            // Generate new quests for each completed quest
+            for (Quest completedQuest : completedQuests) {
+                Quest newQuest = generateNewQuestAfterCompletion(player, completedQuest);
+                remainingQuests.add(newQuest);
+
+                // Notify player
+                player.sendSystemMessage(Component.literal("[New Quest] ")
+                        .withStyle(Style.EMPTY.withColor(0x55FF55))
+                        .append(Component.literal(newQuest.getTitle())
+                                .withStyle(Style.EMPTY.withColor(0xFFFFFF))));
+
+                player.sendSystemMessage(Component.literal(newQuest.getDescription())
+                        .withStyle(Style.EMPTY.withColor(0xAAAAAA)));
+            }
+
+            // Update the player's quest list with the new quests
+            playerQuests.put(playerUUID, remainingQuests);
+            LOGGER.info("Updated player's quest list, now has {} quests", remainingQuests.size());
+
+            // Update cooldown
+            updateQuestGenerationCooldown(playerUUID);
+        } else {
+            LOGGER.info("No completed quests found for player {}", player.getName().getString());
+        }
     }
+
 
     /**
      * Adjust quest parameters based on RL action
