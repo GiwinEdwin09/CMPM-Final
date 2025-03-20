@@ -1,4 +1,3 @@
-// src/main/java/com/cmpm/minecraftquestai/EnemyKillQuest.java
 package com.cmpm.minecraftquestai;
 
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -10,7 +9,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -30,6 +28,9 @@ public class EnemyKillQuest implements Quest {
 
     // Track kill count for each player
     private final Map<UUID, Integer> killCount = new HashMap<>();
+
+    // Track completed status for each player
+    private final Map<UUID, Boolean> completionStatus = new HashMap<>();
 
     public EnemyKillQuest(String id, String title, String entityId, int requiredAmount) {
         this.id = id;
@@ -62,7 +63,8 @@ public class EnemyKillQuest implements Quest {
 
     @Override
     public boolean isCompleted(Player player) {
-        return killCount.getOrDefault(player.getUUID(), 0) >= requiredAmount;
+        return completionStatus.getOrDefault(player.getUUID(), false) ||
+                getProgress(player) >= requiredAmount;
     }
 
     @Override
@@ -77,7 +79,8 @@ public class EnemyKillQuest implements Quest {
 
     @Override
     public void reward(Player player) {
-        killCount.put(player.getUUID(), requiredAmount);
+        // Mark this quest as completed for this player
+        completionStatus.put(player.getUUID(), true);
 
         if (player instanceof ServerPlayer serverPlayer) {
             // Give player XP
@@ -90,22 +93,65 @@ public class EnemyKillQuest implements Quest {
         }
     }
 
+    /**
+     * Process an enemy kill for this quest
+     * @param player The player who killed the entity
+     * @param entityType The type of entity that was killed
+     */
     public void onEnemyKilled(Player player, EntityType<?> entityType) {
-        ResourceLocation entityKey = BuiltInRegistries.ENTITY_TYPE.getKey(entityType);
-        if (entityKey != null && entityKey.toString().equals(entityId)) {
-            UUID playerUUID = player.getUUID();
-            killCount.put(playerUUID, killCount.getOrDefault(playerUUID, 0) + 1);
+        UUID playerUUID = player.getUUID();
+
+        // If quest is already completed for this player, do nothing
+        if (completionStatus.getOrDefault(playerUUID, false)) {
+            return;
+        }
+
+        // Check if the killed entity matches our target entity
+        ResourceLocation killedEntityKey = ForgeRegistries.ENTITY_TYPES.getKey(entityType);
+        ResourceLocation targetEntityKey = new ResourceLocation(entityId);
+
+        if (killedEntityKey != null && killedEntityKey.toString().equals(targetEntityKey.toString())) {
+            // Increment kill count
+            int current = killCount.getOrDefault(playerUUID, 0);
+            killCount.put(playerUUID, current + 1);
+
+            // Log for debugging
+            System.out.println("Player " + player.getName().getString() +
+                    " killed " + entityType.getDescription().getString() +
+                    " - Progress: " + (current + 1) + "/" + requiredAmount +
+                    " for quest " + title);
+
+            // Notify player about progress
+            if ((current + 1) % 5 == 0 || (current + 1) == requiredAmount || requiredAmount <= 5) {
+                player.sendSystemMessage(Component.literal("[Quest Progress] ")
+                        .withStyle(Style.EMPTY.withColor(0xFFAA00))
+                        .append(Component.literal(title + ": " + (current + 1) + "/" + requiredAmount)
+                                .withStyle(Style.EMPTY.withColor(0xFFFFFF))));
+            }
         }
     }
 
+    /**
+     * Static event handler for entity death events
+     */
     @SubscribeEvent
     public static void onLivingDeath(LivingDeathEvent event) {
-        Entity source = event.getSource().getEntity();
-        if (source instanceof ServerPlayer player) {
-            Entity target = event.getEntity();
-            if (target instanceof LivingEntity livingEntity) {
-                EntityType<?> entityType = livingEntity.getType();
-                for (Quest quest : MinecraftQuestAI.questManager.getQuests()) {
+        // Get the entity that died
+        Entity killedEntity = event.getEntity();
+
+        // Get the entity that caused the death (the player)
+        Entity sourceEntity = event.getSource().getEntity();
+
+        if (sourceEntity instanceof ServerPlayer player) {
+            if (killedEntity instanceof LivingEntity) {
+                EntityType<?> entityType = killedEntity.getType();
+
+                // Log for debugging
+                System.out.println("Entity killed: " + entityType.getDescription().getString() +
+                        " by player: " + player.getName().getString());
+
+                // Check if this kill applies to any active quests
+                for (Quest quest : MinecraftQuestAI.questManager.getQuestsForPlayer(player)) {
                     if (quest instanceof EnemyKillQuest enemyKillQuest) {
                         enemyKillQuest.onEnemyKilled(player, entityType);
                     }

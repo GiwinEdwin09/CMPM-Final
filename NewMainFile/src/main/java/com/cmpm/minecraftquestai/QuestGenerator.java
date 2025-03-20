@@ -126,4 +126,97 @@ public class QuestGenerator {
     private static int getScaledAmount(int min, int max) {
         return min + random.nextInt(max) * difficultyLevel;
     }
+
+    /**
+     * Generates a random enemy kill quest with the specified difficulty.
+     *
+     * @param difficultyFactor The difficulty factor to use.
+     * @return A new enemy kill quest.
+     */
+    public static Quest generateRandomEnemyKillQuest(int difficultyFactor) {
+        // Get a random enemy type, weighted by difficulty
+        String enemyId;
+        if (difficultyFactor > 3 && random.nextDouble() < 0.3) {
+            // 30% chance to get a more difficult enemy for higher difficulty levels
+            List<String> hardEnemies = List.of(
+                    "minecraft:witch",
+                    "minecraft:enderman",
+                    "minecraft:blaze",
+                    "minecraft:slime"
+            );
+            enemyId = hardEnemies.get(random.nextInt(hardEnemies.size()));
+        } else {
+            enemyId = ENEMY_TYPES.get(random.nextInt(ENEMY_TYPES.size()));
+        }
+
+        // Calculate required kills based on difficulty
+        int baseRequiredKills = 1 + random.nextInt(3); // Base range: 1-3
+        int requiredKills = baseRequiredKills + (difficultyFactor - 1);
+
+        // Cap the required kills to a reasonable amount
+        requiredKills = Math.min(requiredKills, 15);
+
+        String title = "Defeat " + requiredKills + " " + getEntityName(enemyId);
+        return new EnemyKillQuest(generateQuestId(), title, enemyId, requiredKills);
+    }
+
+    /**
+     * Generates a random item collection quest with the specified difficulty.
+     *
+     * @param difficultyFactor The difficulty factor to use.
+     * @return A new item collection quest.
+     */
+    public static Quest generateRandomItemCollectionQuest(int difficultyFactor) {
+        // Determine which items to request based on difficulty
+        String itemId;
+        if (difficultyFactor > 2 && random.nextDouble() < 0.4) {
+            // 40% chance to get rarer items for higher difficulty levels
+            List<String> rareItems = List.of(
+                    "minecraft:diamond",
+                    "minecraft:emerald",
+                    "minecraft:ender_pearl",
+                    "minecraft:blaze_rod"
+            );
+            itemId = rareItems.get(random.nextInt(rareItems.size()));
+        } else {
+            itemId = ITEM_TYPES.get(random.nextInt(ITEM_TYPES.size()));
+        }
+
+        // Calculate required items based on difficulty and rarity
+        int baseRequiredItems = 1 + random.nextInt(3); // Base range: 1-3
+
+        // Adjust based on item rarity
+        if (itemId.equals("minecraft:diamond") || itemId.equals("minecraft:emerald")) {
+            // Diamonds and emeralds are rare, so require fewer
+            baseRequiredItems = Math.max(1, baseRequiredItems - 1);
+        } else if (itemId.equals("minecraft:iron_ingot") || itemId.equals("minecraft:gold_ingot")) {
+            // Iron and gold are common, so potentially require more
+            baseRequiredItems += 1;
+        }
+
+        // Apply difficulty factor
+        int requiredItems = baseRequiredItems + (int)((difficultyFactor - 1) * 0.5);
+
+        // Cap the required items to a reasonable amount
+        requiredItems = Math.min(requiredItems, 10);
+
+        String title = "Collect " + requiredItems + " " + getItemName(itemId);
+        return new ItemCollectionQuest(generateQuestId(), title, itemId, requiredItems);
+    }
+
+    /**
+     * Generate a random quest with a specific type and difficulty.
+     *
+     * @param questType The type of quest to generate (0 for enemy kill, 1 for item collection).
+     * @param difficultyFactor The difficulty factor to use.
+     * @return A new quest of the specified type.
+     */
+    public static Quest generateQuestByType(int questType, int difficultyFactor) {
+        if (questType == 0) {
+            return generateRandomEnemyKillQuest(difficultyFactor);
+        } else {
+            return generateRandomItemCollectionQuest(difficultyFactor);
+        }
+    }
+
 }
